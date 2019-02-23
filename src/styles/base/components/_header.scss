@@ -1,0 +1,56 @@
+.header {
+  background: $pure-white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: $dark-gray;
+  border-bottom: 0.2rem solid $light-grey;
+  margin-bottom: $m-size;
+  padding: $m-size 0;
+  height: 4rem;
+}
+
+.header__right {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-right: 2.4rem;
+}
+
+.header__left {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-left: 4.8rem;
+  position: absolute;
+  width: 7rem;
+  height: 7rem;
+}
+
+.header__link {
+  font-size: $l-size;
+  margin: 0;
+  float: right;
+  display: block;
+  text-align: center;
+  padding: $m-size;
+  text-decoration: none;
+  font-size: 1.8rem;
+  color: $dark-gray;
+}
+
+.header__icon {
+  display: none;
+}
+
+.header__logo {
+  width: 100%;
+  height: auto;
+}
+
+
+@media (min-width: $desktop-breakpoint) {
+  .header {
+    margin-bottom: $xl-size;
+  }
+}

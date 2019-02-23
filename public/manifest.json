@@ -1,6 +1,10 @@
 {
   "short_name": "React App",
   "name": "Create React App Sample",
+  "permissions": [
+    "http://*/",
+    "https://*/"
+    ],
   "icons": [
     {
       "src": "favicon.ico",

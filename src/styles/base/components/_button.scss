@@ -1,0 +1,14 @@
+.btn {
+  background-color: $orange;
+  color: $pure-white;
+  padding: $m-size;
+  margin: 1rem;
+  width: 50%;
+  border: none;
+  border-radius: .4rem;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: $dark-orange;
+}
