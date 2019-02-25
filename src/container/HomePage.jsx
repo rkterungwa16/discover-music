@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { css } from '@emotion/core'
 import { BeatLoader } from 'react-spinners'
 
 import Header from '../components/Header'
@@ -30,7 +29,9 @@ class HomePage extends React.Component {
     });
 
 	  let e, r = /([^&;=]+)=?([^&;]*)/g,
-	    q = this.props.location.hash.substring(1);
+      q = this.props.location.hash.substring(1);
+
+    // eslint-disable-next-line
 	  while ( e = r.exec(q)) {
 	    hashParams[e[1]] = decodeURIComponent(e[2]);
     }

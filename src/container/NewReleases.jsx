@@ -28,6 +28,7 @@ class NewAlbums extends React.Component {
       currentRoute: this.props.location.pathname.split('/')[1]
     });
 
+    // eslint-disable-next-line
 	  while ( e = r.exec(q)) {
 	    hashParams[e[1]] = decodeURIComponent(e[2]);
     }
