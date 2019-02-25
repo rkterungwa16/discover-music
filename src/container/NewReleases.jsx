@@ -1,22 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-
-import { css } from '@emotion/core'
-import { BeatLoader } from 'react-spinners'
+import { PulseLoader } from 'react-spinners'
 
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import MusicCard from '../components/MusicCard'
-import * as artistsActions from '../actions/artists'
 import * as userActions from '../actions/user'
-import * as playlistActions from '../actions/playlist'
+import * as albumActions from '../actions/userAlbum'
 
-class HomePage extends React.Component {
+class NewAlbums extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      featuredPlaylist: '',
+      newAlbums: '',
       loading: false,
       currentRoute: ''
     }
@@ -24,30 +21,30 @@ class HomePage extends React.Component {
 
   componentDidMount () {
     let hashParams = {};
+	  let e, r = /([^&;=]+)=?([^&;]*)/g,
+      q = this.props.location.hash.substring(1);
 
     this.setState({
-      currentRoute: this.props.location.pathname.split('/')[0]
+      currentRoute: this.props.location.pathname.split('/')[1]
     });
 
-	  let e, r = /([^&;=]+)=?([^&;]*)/g,
-	    q = this.props.location.hash.substring(1);
 	  while ( e = r.exec(q)) {
 	    hashParams[e[1]] = decodeURIComponent(e[2]);
     }
 	  if(!hashParams.access_token) {
-      window.location.href = `https://accounts.spotify.com/en/authorize?client_id=59dbbe0b726e402797a9bd8a8ce7b47b&response_type=token&redirect_uri=http:%2F%2Flocalhost:3000%2Fcallback&scope=user-read-private%20user-read-email&state=34fFs29kd09&response_type=token`;
+      window.location.href = `https://accounts.spotify.com/en/authorize?client_id=59dbbe0b726e402797a9bd8a8ce7b47b&response_type=token&redirect_uri=http:%2F%2Flocalhost:3000%2Fnew-releases%2Fcallback&scope=user-read-private%20user-read-email&state=34fFs29kd09&response_type=token`;
 	  } else {
       this.props.userActions.getUser(hashParams.access_token);
-      this.props.playlistActions.getFeaturedPlaylists({
+      this.props.albumActions.getNewAlbums({
         limit: 10
       }, hashParams.access_token)
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.featuredPlaylist) {
+    if (nextProps.newAlbums) {
       this.setState({
-        featuredPlaylist: nextProps.featuredPlaylist,
+        newAlbums: nextProps.newAlbums,
         loading: false
       })
     }
@@ -59,42 +56,43 @@ class HomePage extends React.Component {
     }
   }
 
-  renderFeaturedPlaylist (playlists) {
-    if (playlists) {
+  renderNewAlbums (albums) {
+    if (albums) {
 
-      const renderedPlaylist = JSON.parse(playlists).playlists.items.map((playlist) => {
+      const renderedAlbum = JSON.parse(albums).albums.items.map((album) => {
         return (
           <MusicCard
-            imageUrl={playlist.images[0].url}
-            key={playlist.id}
-            name={playlist.name}
+            imageUrl={album.images[0].url}
+            key={album.id}
+            name={album.name}
           />
         )
       })
 
-      return renderedPlaylist
+      return renderedAlbum
     }
   }
 
   render () {
     const {
-    loading,
-    featuredPlaylist,
-    currentRoute
+      loading,
+      newAlbums,
+      currentRoute
     } = this.state
+
     return (
       <div className='container-wrapper'>
         <Header currentRoute={currentRoute} />
         <div className='container'>
           {!loading ?
             <div className='music__container'>
-            {this.renderFeaturedPlaylist(featuredPlaylist)}
-          </div>:
+              { this.renderNewAlbums(newAlbums) }
+            </div> :
             <div className='loader__container'>
-            <BeatLoader
+            <PulseLoader
               sizeUnit={'rem'}
-              size={10}
-              color={'#123abc'}
+              size={2}
+              color={'#ffffff'}
               loading={this.state.loading}
             /></div>
           }
@@ -108,18 +106,17 @@ class HomePage extends React.Component {
 const mapStateToProps = state => {
   return {
     token: state.authorize.token,
-    featuredPlaylist: state.playlist.featuredPlaylists,
-    loading: state.playlist.isFetchingPlaylists
+    newAlbums: state.userAlbums.newAlbums,
+    loading: state.userAlbums.isFetchingNewAlbums
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     dispatch,
-    artistsActions: bindActionCreators(artistsActions, dispatch),
     userActions: bindActionCreators(userActions, dispatch),
-    playlistActions: bindActionCreators(playlistActions, dispatch)
+    albumActions: bindActionCreators(albumActions, dispatch)
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
+export default connect(mapStateToProps, mapDispatchToProps)(NewAlbums)

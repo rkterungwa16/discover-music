@@ -7,3 +7,10 @@ export const getCurrentUserAlbumsApi = (filterParams = null, token) => {
     .then(parseJSON)
     .catch(err => err)
 }
+
+export const getNewAlbumsApi = (filterParams = null, token) => {
+  return get('get-new-albums', filterParams, token)
+    .then(checkHttpStatus)
+    .then(parseJSON)
+    .catch(err => err)
+}

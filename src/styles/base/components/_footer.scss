@@ -8,9 +8,12 @@
   color: $pure-white;
   text-align: center;
   position: fixed;
-  height: 8rem;
+  display: flex;
+  justify-content: center;
+  height: 5rem;
 }
 
 .footer__text {
   font-size: $l-size;
+  align-self: center;
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import logo from '../assets/logo.png'
 
 class Header extends Component {
@@ -28,10 +29,34 @@ class Header extends Component {
         </div>
         <div
           className={!this.state.open ? 'header__center' : 'header__center responsive'}>
-          <a href='#featured' className='header__link'>Featured</a>
-          <a href='#genres' className='header__link'>Genres & Mode</a>
-          <a href='#library' className='header__link'>Your library</a>
-          <a href='#recently' className='header__link'>Recently played</a>
+          <Link
+            to='/'
+            className='header__link'
+            style={{
+              color: this.props.currentRoute === '' ? 'white' : ''
+            }}
+          >Featured</Link>
+          <Link
+            to='/new-releases'
+            className='header__link'
+            style={{
+              color: this.props.currentRoute === 'new-releases' ? 'white' : ''
+            }}
+          >New Releases</Link>
+          <Link
+            to='/your-library'
+            className='header__link'
+            style={{
+              color: this.props.currentRoute === 'your-library' ? 'white' : ''
+            }}
+          >Your library</Link>
+          <Link
+            to='/categories'
+            style={{
+              color: this.props.currentRoute === 'your-library' ? 'white' : ''
+            }}
+            className='header__link'
+          >Categories</Link>
         </div>
         <div
           className='header__icon'

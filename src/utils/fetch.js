@@ -5,7 +5,8 @@ export const paths = {
   'get-user': 'me',
   'get-user-albums': 'me/albums',
   'get-user-tracks': 'me/tracks',
-  'get-featured-playlists': 'browse/featured-playlists'
+  'get-featured-playlists': 'browse/featured-playlists',
+  'get-new-albums': 'browse/new-releases'
 }
 
 /**
@@ -78,9 +79,12 @@ export function checkHttpStatus (response) {
       resolve(response)
     }
 
-    const errorText = response && response.statusText ? response.statusText : 'Unknown Error'
-    const error = new Error(errorText)
-    reject(error)
+    if (response.error) {
+      const error = new Error(response.error.message)
+      reject(error)
+    }
+    // const errorText = response && response.statusText ? response.statusText : 'Unknown Error'
+
   })
 }
 
@@ -102,5 +106,6 @@ export function parseJSON (response) {
 }
 
 export const handleError = (error) => {
+  console.log('page error', error)
   return error
 }

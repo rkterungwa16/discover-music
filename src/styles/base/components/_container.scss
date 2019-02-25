@@ -2,11 +2,18 @@
   display: flex;
   flex-direction: row;
   bottom: 8rem;
-  min-height: 100%;
+  justify-content: center;
   margin: 0 auto -50px;
+  max-height: 110vh;
+  height: 110vh;
+  overflow: auto;
+  background-color: $background-gray;
+  position: relative;
+  top: 10rem;
 }
 
 .music__container {
+  width: 100%;
   margin: 4rem;
   display: flex;
   flex-wrap: wrap;

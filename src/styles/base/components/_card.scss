@@ -15,16 +15,6 @@
   padding: 1rem;
 }
 
-.overlay {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0);
-  transition: background 0.5s ease;
-}
-
 .card:hover {
   background: rgba(0, 0, 0, .3);
 }

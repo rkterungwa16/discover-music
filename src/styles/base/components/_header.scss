@@ -7,6 +7,9 @@
   margin-bottom: $m-size;
   padding: $m-size 0;
   height: 4rem;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
 }
 
 .header__center {
@@ -27,16 +30,22 @@
 }
 
 .header__link {
-  font-size: $l-size;
+  text-transform: uppercase;
+  letter-spacing: .19rem;
   margin: 0;
   float: right;
   display: block;
   text-align: center;
   padding: $m-size;
   text-decoration: none;
-  font-size: 1.8rem;
-  font-weight: bold;
+  font-size: $mm-size;
+  font-weight: 400;
+  color: $light-gray;
+}
+
+.header__link:hover {
   color: $pure-white;
+  position: relative;
 }
 
 .header__icon {
@@ -53,6 +62,16 @@
   right: 2rem;
   top: 2rem;
 }
+
+// .header__link:before {
+//   content: "";
+//   height: 0.4rem;
+//   background-color: #ffffff;
+//   width: 100%;
+//   position: relative;
+//   display: block;
+//   bottom: -3.7rem;
+// }
 
 @media screen and (max-width: 600px) {
   .header__center a:not(:first-child) {display: none;}
