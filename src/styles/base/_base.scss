@@ -3,29 +3,38 @@ html, body {
     height: 1716px;
     margin: 0;
   }
-  
+
   .App, #root, .container-wrapper {
     height: 100%;
+    background-color: $background-gray;
   }
-  
+
+  h4, p {
+    margin: 0;
+  }
+
+  h4 {
+    font-size: large;
+  }
+
   html {
     font-size: 62.5%;
   }
-  
+
   body {
     background: $pure-white;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-size: $m-size;
   }
-  
+
   button {
     cursor: pointer;
   }
-  
+
   button:disabled {
     cursor: default;
   }
-  
+
   .App {
     text-align: center;
   }

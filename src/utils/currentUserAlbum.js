@@ -1,7 +1,8 @@
+
 import { get, checkHttpStatus, parseJSON } from './fetch'
 
-export const getArtistsApi = (filterParams = null) => {
-  return get('get-artists', filterParams)
+export const getCurrentUserAlbumsApi = (filterParams = null, token) => {
+  return get('get-user-albums', filterParams, token)
     .then(checkHttpStatus)
     .then(parseJSON)
     .catch(err => err)

@@ -4,10 +4,10 @@
   left: 0;
   padding: 1rem;
   width: 100%;
-  background-color:$pure-white;
-  color: $dark-gray;
+  background-color:$transparent-dark;
+  color: $pure-white;
   text-align: center;
-  border-top: 0.2rem solid $light-grey;
+  position: fixed;
   height: 8rem;
 }
 

@@ -11,6 +11,7 @@ class App extends Component {
       <div className='App'>
         <Switch>
           <Route exact path='/' component={HomePage} />
+          <Route path='/callback' component={HomePage} />
           {/* <Route path='*' component={NotFound} /> */}
         </Switch>
       </div>

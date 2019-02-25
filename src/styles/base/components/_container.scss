@@ -5,3 +5,21 @@
   min-height: 100%;
   margin: 0 auto -50px;
 }
+
+.music__container {
+  margin: 4rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 30rem;
+}
+
+@media screen and (max-width: 600px) {
+  .music__container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 2rem;
+  }
+}

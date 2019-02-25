@@ -1,9 +1,11 @@
-import OAuth from 'oauth-1.0a'
-import crypto from 'crypto'
 import { API_URL } from '../constants'
 
 export const paths = {
-  'get-artists': 'browse/categories'
+  'get-artists': 'browse/categories',
+  'get-user': 'me',
+  'get-user-albums': 'me/albums',
+  'get-user-tracks': 'me/tracks',
+  'get-featured-playlists': 'browse/featured-playlists'
 }
 
 /**
@@ -17,22 +19,24 @@ export const paths = {
  *
  * @return {Function} A function call of the appropriate api
  */
-function fetchBackend (endpoint, method, body, params, id) {
+function fetchBackend (endpoint, method, body, params, token) {
   const headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer 5232ac137b7f4a45a1e52c37bb20e1a'
+    'Authorization': `Bearer ${token}`
   }
   const fetchObject = { method, headers }
   // map endpoint passed to paths object keys to get currect url
+  let url
   const path = paths[endpoint] || endpoint
-  let url = `${API_URL}${path}`
+
+   url = `${API_URL}${path}`
+
+   if (endpoint === 'get-token') {
+    url = `https://accounts.spotify.com/${path}`
+  }
   if (body) {
     fetchObject.body = JSON.stringify(body)
-  }
-
-  if (id) {
-    url = `${url}/${id}`
   }
 
   // Construct the appropriate url that has extra parameters
@@ -52,8 +56,8 @@ function fetchBackend (endpoint, method, body, params, id) {
  * @param {String | null} params query strings if
  * none is required pass null
  */
-export function get (endpoint, params, id = null) {
-  return fetchBackend(endpoint, 'GET', null, params, id)
+export function get (endpoint, params, token) {
+  return fetchBackend(endpoint, 'GET', null, params, token)
 }
 
 /**
@@ -65,7 +69,6 @@ export function get (endpoint, params, id = null) {
  * or rejected based on the appropriate conditions
  */
 export function checkHttpStatus (response) {
-  console.log('response', response)
   return new Promise((resolve, reject) => {
     if (response.status === 404) {
 
@@ -86,7 +89,6 @@ export function checkHttpStatus (response) {
  * @param {Object} response Object from successful api call
  */
 export function parseJSON (response) {
-  console.log('parse json', response)
   return new Promise((resolve, reject) => {
     if (!response || !response.json) {
       const connectionError = new Error()
@@ -100,6 +102,5 @@ export function parseJSON (response) {
 }
 
 export const handleError = (error) => {
-  console.log('error response', error)
   return error
 }

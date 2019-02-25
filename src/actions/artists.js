@@ -14,7 +14,6 @@ export function getArtistsRequest () {
 }
 
 export function getArtistsSuccess (data) {
-  console.log('get artists data', data)
   return {
     type: FETCH_ALL_ARTISTS_SUCCEEDED,
     payload: data
@@ -36,7 +35,6 @@ export function getAllArtists () {
 
     return getArtistsApi()
       .then((response) => {
-        console.log('response action', response)
         dispatch(getArtistsSuccess(response))
         return true
       })
