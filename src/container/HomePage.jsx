@@ -36,7 +36,7 @@ class HomePage extends React.Component {
 	    hashParams[e[1]] = decodeURIComponent(e[2]);
     }
 	  if(!hashParams.access_token) {
-      window.location.href = `https://accounts.spotify.com/en/authorize?client_id=59dbbe0b726e402797a9bd8a8ce7b47b&response_type=token&redirect_uri=http:%2F%2Flocalhost:3000%2Fcallback&scope=user-read-private%20user-read-email&state=34fFs29kd09&response_type=token`;
+      window.location.href = `https://accounts.spotify.com/en/authorize?client_id=59dbbe0b726e402797a9bd8a8ce7b47b&response_type=token&redirect_uri=http:%2F%2Flocalhost:3000%2Fcallback&scope=user-read-private%20user-library-read%20user-library-modify%20user-read-email%20playlist-read-private%20playlist-modify-private%20playlist-modify-public%20playlist-read-collaborative%20user-modify-playback-state%20user-read-currently-playing%20user-read-playback-state%20user-top-read%20user-read-recently-played`;
 	  } else {
       this.props.userActions.getUser(hashParams.access_token);
       this.props.playlistActions.getFeaturedPlaylists({
@@ -94,8 +94,8 @@ class HomePage extends React.Component {
             <div className='loader__container'>
             <BeatLoader
               sizeUnit={'rem'}
-              size={10}
-              color={'#123abc'}
+              size={2}
+              color={'#ffffff'}
               loading={this.state.loading}
             /></div>
           }

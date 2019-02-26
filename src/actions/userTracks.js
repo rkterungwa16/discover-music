@@ -4,7 +4,7 @@ import {
   FETCH_CURRENT_USER_TRACKS_REQUESTED
 } from '../constants'
 
-import { getCurrentUserTrackApi} from '../utils/artists'
+import { getCurrentUserTracksApi} from '../utils/currentUserTracks'
 import { handleError } from '../utils/fetch'
 
 export function getCurrentUserTrackRequest () {
@@ -29,11 +29,11 @@ export function getCurrentUserTrackFailure (error) {
   }
 }
 
-export function getCurrentUserTrack () {
+export function getCurrentUserTrack (params, token) {
   return (dispatch) => {
     dispatch(getCurrentUserTrackRequest())
 
-    return getCurrentUserTrackApi()
+    return getCurrentUserTracksApi(params, token)
       .then((response) => {
         dispatch(getCurrentUserTrackSuccess(response))
         return true

@@ -5,15 +5,17 @@ import { PulseLoader } from 'react-spinners'
 
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import MusicCard from '../components/MusicCard'
+import AlbumCard from '../components/AlbumCard'
 import * as userActions from '../actions/user'
 import * as albumActions from '../actions/userAlbum'
+import * as trackActions from '../actions/userTracks'
 
-class NewAlbums extends React.Component {
+class Library extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      newAlbums: '',
+      userAlbums: '',
+      userTracks: '',
       loading: false,
       currentRoute: ''
     }
@@ -33,19 +35,26 @@ class NewAlbums extends React.Component {
 	    hashParams[e[1]] = decodeURIComponent(e[2]);
     }
 	  if(!hashParams.access_token) {
-      window.location.href = `https://accounts.spotify.com/en/authorize?client_id=59dbbe0b726e402797a9bd8a8ce7b47b&response_type=token&redirect_uri=http:%2F%2Flocalhost:3000%2Fnew-releases%2Fcallback&scope=user-read-private%20user-library-read%20user-library-modify%20user-read-email%20playlist-read-private%20playlist-modify-private%20playlist-modify-public%20playlist-read-collaborative%20user-modify-playback-state%20user-read-currently-playing%20user-read-playback-state%20user-top-read%20user-read-recently-played`;
+      window.location.href = `https://accounts.spotify.com/en/authorize?client_id=59dbbe0b726e402797a9bd8a8ce7b47b&response_type=token&redirect_uri=http:%2F%2Flocalhost:3000%2Flibrary%2Fcallback&scope=user-read-private%20user-library-read%20user-library-modify%20user-read-email%20playlist-read-private%20playlist-modify-private%20playlist-modify-public%20playlist-read-collaborative%20user-modify-playback-state%20user-read-currently-playing%20user-read-playback-state%20user-top-read%20user-read-recently-played`;
 	  } else {
       this.props.userActions.getUser(hashParams.access_token);
-      this.props.albumActions.getNewAlbums({
+      this.props.albumActions.getCurrentUserAlbums({
+        limit: 10,
+        aggregate_tracks: true,
+        market: 'from_token'
+      }, hashParams.access_token)
+
+      this.props.trackActions.getCurrentUserTrack({
         limit: 10
       }, hashParams.access_token)
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.newAlbums) {
+    if (nextProps.userAlbums && nextProps.userTracks) {
       this.setState({
-        newAlbums: nextProps.newAlbums,
+        userAlbums: nextProps.userAlbums,
+        userTracks: nextProps.userTracks,
         loading: false
       })
     }
@@ -57,15 +66,16 @@ class NewAlbums extends React.Component {
     }
   }
 
-  renderNewAlbums (albums) {
+  renderUserAlbums (albums) {
     if (albums) {
 
-      const renderedAlbum = JSON.parse(albums).albums.items.map((album) => {
+      const renderedAlbum = JSON.parse(albums).items.map((album) => {
         return (
-          <MusicCard
-            imageUrl={album.images[0].url}
-            key={album.id}
-            name={album.name}
+          <AlbumCard
+            imageUrl={album.album.images[0].url}
+            key={album.album.id}
+            albumName={album.album.name}
+            name={album.album.artists[0].name}
           />
         )
       })
@@ -77,7 +87,7 @@ class NewAlbums extends React.Component {
   render () {
     const {
       loading,
-      newAlbums,
+      userAlbums,
       currentRoute
     } = this.state
 
@@ -86,9 +96,13 @@ class NewAlbums extends React.Component {
         <Header currentRoute={currentRoute} />
         <div className='container'>
           {!loading ?
-            <div className='music__container'>
-              { this.renderNewAlbums(newAlbums) }
-            </div> :
+            <div className='albums__container'>
+                <h1 className='album__header--text'>Favorite Albums</h1>
+               <div className='music__container'>
+                  { this.renderUserAlbums(userAlbums) }
+                </div>
+            </div>
+            :
             <div className='loader__container'>
             <PulseLoader
               sizeUnit={'rem'}
@@ -107,8 +121,9 @@ class NewAlbums extends React.Component {
 const mapStateToProps = state => {
   return {
     token: state.authorize.token,
-    newAlbums: state.userAlbums.newAlbums,
-    loading: state.userAlbums.isFetchingNewAlbums
+    userAlbums: state.userAlbums.userAlbums,
+    userTracks: state.userTracks.userTracks,
+    loading: state.userAlbums.isFetchingUserAlbums
   }
 }
 
@@ -116,8 +131,9 @@ const mapDispatchToProps = dispatch => {
   return {
     dispatch,
     userActions: bindActionCreators(userActions, dispatch),
-    albumActions: bindActionCreators(albumActions, dispatch)
+    albumActions: bindActionCreators(albumActions, dispatch),
+    trackActions: bindActionCreators(trackActions, dispatch)
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewAlbums)
+export default connect(mapStateToProps, mapDispatchToProps)(Library)

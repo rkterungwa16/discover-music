@@ -33,11 +33,11 @@ export function getCurrentUserAlbumFailure (error) {
   }
 }
 
-export function getCurrentUserAlbums () {
+export function getCurrentUserAlbums (params, token) {
   return (dispatch) => {
     dispatch(getCurrentUserAlbumRequest())
 
-    return getCurrentUserAlbumsApi()
+    return getCurrentUserAlbumsApi(params, token)
       .then((response) => {
         dispatch(getCurrentUserAlbumSuccess(response))
         return true

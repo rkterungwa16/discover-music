@@ -28,7 +28,7 @@ function userAlbums (state = initialState, action) {
     case FETCH_CURRENT_USER_ALBUMS_SUCCEEDED:
       return Object.assign({}, state, {
         isFetchingUserAlbums: false,
-        userAlbums: action.payload.user,
+        userAlbums: action.payload,
         fetchingUserAlbumsError: null
       })
 
@@ -36,7 +36,7 @@ function userAlbums (state = initialState, action) {
       return Object.assign({}, state, {
         isFetchingUserAlbums: false,
         userAlbums: '',
-        fetchingUserAlbumsError: action.payload.error.message
+        fetchingUserAlbumsError: action.payload
       })
 
       case FETCH_NEW_ALBUMS_REQUESTED:

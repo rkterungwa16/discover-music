@@ -6,7 +6,8 @@ export const paths = {
   'get-user-albums': 'me/albums',
   'get-user-tracks': 'me/tracks',
   'get-featured-playlists': 'browse/featured-playlists',
-  'get-new-albums': 'browse/new-releases'
+  'get-new-albums': 'browse/new-releases',
+  'get-genres': 'browse/categories'
 }
 
 /**

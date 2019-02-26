@@ -3,6 +3,8 @@ import { Route, Switch } from 'react-router-dom'
 
 import HomePage from './container/HomePage'
 import NewReleasePage from './container/NewReleases'
+import LibraryPage from './container/LibraryPage'
+import GenresPage from './container/Genres'
 import './styles/styles.scss'
 import './assets/logo.png'
 
@@ -15,6 +17,10 @@ class App extends Component {
           <Route path='/callback' component={HomePage} />
           <Route exact path='/new-releases' component={NewReleasePage} />
           <Route path='/new-releases/callback' component={NewReleasePage} />
+          <Route exact path='/genres' component={GenresPage} />
+          <Route path='/genres/callback' component={GenresPage} />
+          <Route exact path='/library' component={LibraryPage} />
+          <Route path='/library/callback' component={LibraryPage} />
           {/* <Route path='*' component={NotFound} /> */}
         </Switch>
       </div>

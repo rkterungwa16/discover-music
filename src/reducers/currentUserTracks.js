@@ -22,7 +22,7 @@ function userTracks (state = initialState, action) {
     case FETCH_CURRENT_USER_TRACKS_SUCCEEDED:
       return Object.assign({}, state, {
         isFetchingUserTracks: false,
-        userTracks: action.payload.user,
+        userTracks: action.payload,
         fetchingUserTracksError: null
       })
 
@@ -30,7 +30,7 @@ function userTracks (state = initialState, action) {
       return Object.assign({}, state, {
         isFetchingUserTracks: false,
         userTracks: {},
-        fetchingUserTracksError: action.payload.error.message
+        fetchingUserTracksError: action.payload
       })
 
     default:

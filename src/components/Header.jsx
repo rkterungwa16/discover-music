@@ -44,19 +44,19 @@ class Header extends Component {
             }}
           >New Releases</Link>
           <Link
-            to='/your-library'
+            to='/library'
             className='header__link'
             style={{
-              color: this.props.currentRoute === 'your-library' ? 'white' : ''
+              color: this.props.currentRoute === 'library' ? 'white' : ''
             }}
           >Your library</Link>
           <Link
-            to='/categories'
+            to='/genres'
             style={{
-              color: this.props.currentRoute === 'your-library' ? 'white' : ''
+              color: this.props.currentRoute === 'genres' ? 'white' : ''
             }}
             className='header__link'
-          >Categories</Link>
+          >Genres & Mood</Link>
         </div>
         <div
           className='header__icon'
