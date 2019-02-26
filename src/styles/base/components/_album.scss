@@ -6,8 +6,8 @@
 .album__header--text {
   font-size: 5rem;
   color: #1E2125;
-  padding: 2rem;
   display: flex;
+  width: 50%;
 }
 
 .album__header {
@@ -16,7 +16,10 @@
 
 .artist__name {
   align-self: center;
+  justify-self: flex-start;
   font-size: 2rem;
+  display: flex;
+  width: 50%;
 }
 
 .album-details__container {
@@ -64,4 +67,18 @@
 
 .album__tracks li:hover .album-track__play--icon {
   opacity: 1;
+}
+
+.close__btn {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 70%;
+  justify-content: center;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.album__header:hover .close__btn {
+  opacity:  1;
 }

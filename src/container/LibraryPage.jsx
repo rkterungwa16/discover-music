@@ -130,7 +130,7 @@ class Library extends React.Component {
           <div className='album-img__wrapper'>
             <img className='album__img' src={JSON.parse(album).images[0].url} alt='Album' />
           </div>
-          <div className='alb-track__wrapper'><ul className="album__tracks">
+          <div className='alb-track__wrapper'><ul className='album__tracks'>
             { renderedTracks }
           </ul></div>
         </div>
@@ -166,6 +166,10 @@ class Library extends React.Component {
                   <div className='album__header'>
                     <h1 className='album__header--text'>{JSON.parse(albumDetails).name}</h1>
                     <h4 className='artist__name'>{`(${JSON.parse(albumDetails).artists[0].name})`}</h4>
+                    <div
+                      className='close__btn'
+                      onClick={this.closeAlbum}
+                    ><i className='fas fa-times fa-5x'></i></div>
                   </div>
                   { this.renderAlbumTracks(albumDetails) }
                 </Fragment>
