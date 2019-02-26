@@ -7,7 +7,8 @@ export const paths = {
   'get-user-tracks': 'me/tracks',
   'get-featured-playlists': 'browse/featured-playlists',
   'get-new-albums': 'browse/new-releases',
-  'get-genres': 'browse/categories'
+  'get-genres': 'browse/categories',
+  'get-album': 'albums/'
 }
 
 /**
@@ -21,7 +22,7 @@ export const paths = {
  *
  * @return {Function} A function call of the appropriate api
  */
-function fetchBackend (endpoint, method, body, params, token) {
+function fetchBackend (endpoint, method, body, params, token, id) {
   const headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
@@ -34,11 +35,12 @@ function fetchBackend (endpoint, method, body, params, token) {
 
    url = `${API_URL}${path}`
 
-   if (endpoint === 'get-token') {
-    url = `https://accounts.spotify.com/${path}`
-  }
   if (body) {
     fetchObject.body = JSON.stringify(body)
+  }
+
+  if (id) {
+    url = `${url}${id}`
   }
 
   // Construct the appropriate url that has extra parameters
@@ -58,8 +60,8 @@ function fetchBackend (endpoint, method, body, params, token) {
  * @param {String | null} params query strings if
  * none is required pass null
  */
-export function get (endpoint, params, token) {
-  return fetchBackend(endpoint, 'GET', null, params, token)
+export function get (endpoint, params, token, id) {
+  return fetchBackend(endpoint, 'GET', null, params, token, id)
 }
 
 /**

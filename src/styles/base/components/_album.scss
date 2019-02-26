@@ -1,0 +1,67 @@
+
+.albums__container {
+  width: 80%;
+}
+
+.album__header--text {
+  font-size: 5rem;
+  color: #1E2125;
+  padding: 2rem;
+  display: flex;
+}
+
+.album__header {
+  display: flex;
+}
+
+.artist__name {
+  align-self: center;
+  font-size: 2rem;
+}
+
+.album-details__container {
+  display: flex;
+  height: 40rem;
+}
+
+.album__img {
+  position: relative;
+  width: 40rem;
+}
+
+.alb-track__wrapper {
+  width: 100%;
+  background-color: #1E2125;
+  color: $pure-white;
+}
+
+.album__tracks {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+  height: 40rem;
+}
+
+.album__tracks li {
+  padding: 2rem;
+  font-size: 1.7rem;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+}
+
+.album__tracks li:hover:not(.header) {
+  background-color: #0D141F;
+}
+
+.album-track__play--icon {
+  padding: 1rem;
+  opacity: 0;
+}
+
+.album__tracks li:hover .album-track__play--icon {
+  opacity: 1;
+}

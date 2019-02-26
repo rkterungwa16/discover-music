@@ -4,7 +4,10 @@ import {
   FETCH_CURRENT_USER_ALBUMS_FAILED,
   FETCH_NEW_ALBUMS_SUCCEEDED,
   FETCH_NEW_ALBUMS_REQUESTED,
-  FETCH_NEW_ALBUMS_FAILED
+  FETCH_NEW_ALBUMS_FAILED,
+  FETCH_ONE_ALBUM_FAILED,
+  FETCH_ONE_ALBUM_REQUESTED,
+  FETCH_ONE_ALBUM_SUCCEEDED
 } from '../constants'
 
 const initialState = {
@@ -13,7 +16,10 @@ const initialState = {
   fetchingUserAlbumsError: null,
   isFetchingNewAlbums: false,
   newAlbums: '',
-  fetchingNewAlbumsError: null
+  fetchingNewAlbumsError: null,
+  isFetchingAlbum: false,
+  album: '',
+  fetchingAlbumError: null
 }
 
 function userAlbums (state = initialState, action) {
@@ -39,7 +45,7 @@ function userAlbums (state = initialState, action) {
         fetchingUserAlbumsError: action.payload
       })
 
-      case FETCH_NEW_ALBUMS_REQUESTED:
+    case FETCH_NEW_ALBUMS_REQUESTED:
       return Object.assign({}, state, {
         isFetchingNewAlbums: true,
         newAlbums: '',
@@ -58,6 +64,27 @@ function userAlbums (state = initialState, action) {
         isFetchingNewAlbums: false,
         newAlbums: '',
         fetchingNewAlbumsError: action.payload
+      })
+
+    case FETCH_ONE_ALBUM_REQUESTED:
+      return Object.assign({}, state, {
+        isFetchingNewAlbums: true,
+        newAlbums: '',
+        fetchingNewAlbumsError: null
+      })
+
+    case FETCH_ONE_ALBUM_SUCCEEDED:
+      return Object.assign({}, state, {
+        isFetchingAlbum: false,
+        album: action.payload,
+        fetchingalbumError: null
+      })
+
+    case FETCH_ONE_ALBUM_FAILED:
+      return Object.assign({}, state, {
+        isFetchingAlbum: false,
+        album: '',
+        fetchingAlbumsError: action.payload
       })
 
     default:

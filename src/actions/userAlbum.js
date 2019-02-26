@@ -4,10 +4,17 @@ import {
   FETCH_CURRENT_USER_ALBUMS_SUCCEEDED,
   FETCH_NEW_ALBUMS_FAILED,
   FETCH_NEW_ALBUMS_REQUESTED,
-  FETCH_NEW_ALBUMS_SUCCEEDED
+  FETCH_NEW_ALBUMS_SUCCEEDED,
+  FETCH_ONE_ALBUM_FAILED,
+  FETCH_ONE_ALBUM_SUCCEEDED,
+  FETCH_ONE_ALBUM_REQUESTED
 } from '../constants'
 
-import { getNewAlbumsApi, getCurrentUserAlbumsApi} from '../utils/currentUserAlbum'
+import {
+  getNewAlbumsApi,
+  getCurrentUserAlbumsApi,
+  getAlbumApi
+} from '../utils/currentUserAlbum'
 import { handleError } from '../utils/fetch'
 
 /***********************************************/
@@ -84,6 +91,46 @@ export function getNewAlbums (params, token) {
       })
       .catch((error) => {
         dispatch(getNewAlbumsFailure(handleError(error)))
+        return false
+      })
+  }
+}
+
+/***********************************************/
+
+export function getAlbumRequest () {
+  return {
+    type: FETCH_ONE_ALBUM_REQUESTED
+  }
+}
+
+export function getAlbumSuccess (data) {
+  return {
+    type: FETCH_ONE_ALBUM_SUCCEEDED,
+    payload: data
+  }
+}
+
+export function getAlbumFailure (error) {
+  return {
+    type: FETCH_ONE_ALBUM_FAILED,
+    payload: {
+      error: error
+    }
+  }
+}
+
+export function getAlbum (params, token, id) {
+  return (dispatch) => {
+    dispatch(getAlbumRequest())
+
+    return getAlbumApi(params, token, id)
+      .then((response) => {
+        dispatch(getAlbumSuccess(response))
+        return true
+      })
+      .catch((error) => {
+        dispatch(getAlbumFailure(handleError(error)))
         return false
       })
   }

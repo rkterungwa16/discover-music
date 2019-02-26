@@ -1,13 +1,19 @@
 import React from 'react'
 
-const AlbumCard = (props) => (
-  <div className='card'>
-    <img className='card__img' src={props.imageUrl} alt='Avatar' />
-    <div className='card-text__container'>
-      <h4><b>{props.albumName}</b></h4>
-      <h4><b>{props.name}</b></h4>
+const AlbumCard = (props) => {
+  console.log('album card', props)
+  return (
+    <div
+      className='card'
+      onClick={() => props.getAlbum(props.id)}
+    >
+      <img className='card__img' src={props.imageUrl} alt='Avatar' />
+      <div className='card-text__container'>
+        <h4><b>{props.albumName}</b></h4>
+        <h4><b>{props.name}</b></h4>
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
 export default AlbumCard;
