@@ -1,5 +1,6 @@
 export const API_URL = 'https://api.spotify.com/v1/'
-export const CALLBACK_BASE_URL = process.env.NODE_ENV === 'production' ? 'https://gorilla-muzic.herokuapp.com' : 'http://localhost:3000'
+export const CALLBACK_BASE_URL = process.env.NODE_ENV === 'production' ? 'gorilla-muzic.herokuapp.com' : 'localhost:3000'
+export const HTTP = process.env.NODE_ENV === 'production' ? 'https' : 'http'
 
 export const FETCH_ALL_ARTISTS_SUCCEEDED = 'FETCH_ALL_ARTISTS_SUCCEEDED'
 export const FETCH_ALL_ARTISTS_REQUESTED = 'FETCH_ALL_ARTISTS_REQUESTED'

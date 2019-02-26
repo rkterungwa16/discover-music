@@ -10,7 +10,7 @@ import * as authActions from '../actions/auth'
 import * as userActions from '../actions/user'
 import * as albumActions from '../actions/userAlbum'
 import * as trackActions from '../actions/userTracks'
-import { CALLBACK_BASE_URL } from '../constants'
+import { CALLBACK_BASE_URL, HTTP } from '../constants'
 
 class Library extends React.Component {
   constructor (props) {
@@ -43,7 +43,7 @@ class Library extends React.Component {
 	    hashParams[e[1]] = decodeURIComponent(e[2]);
     }
 	  if(!hashParams.access_token) {
-      window.location.href = `https://accounts.spotify.com/en/authorize?client_id=59dbbe0b726e402797a9bd8a8ce7b47b&response_type=token&redirect_uri=http:%2F%2F${CALLBACK_BASE_URL}%2Flibrary%2Fcallback&scope=user-read-private%20user-library-read%20user-library-modify%20user-read-email%20playlist-read-private%20playlist-modify-private%20playlist-modify-public%20playlist-read-collaborative%20user-modify-playback-state%20user-read-currently-playing%20user-read-playback-state%20user-top-read%20user-read-recently-played`;
+      window.location.href = `https://accounts.spotify.com/en/authorize?client_id=59dbbe0b726e402797a9bd8a8ce7b47b&response_type=token&redirect_uri=${HTTP}:%2F%2F${CALLBACK_BASE_URL}%2Flibrary%2Fcallback&scope=user-read-private%20user-library-read%20user-library-modify%20user-read-email%20playlist-read-private%20playlist-modify-private%20playlist-modify-public%20playlist-read-collaborative%20user-modify-playback-state%20user-read-currently-playing%20user-read-playback-state%20user-top-read%20user-read-recently-played`;
 	  } else {
       this.props.authActions.authorizeUserSuccess(hashParams.access_token)
       this.props.userActions.getUser(hashParams.access_token);
