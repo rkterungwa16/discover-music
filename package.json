@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "express": "^4.16.4",
     "node-sass": "^4.11.0",
     "oauth-1.0a": "^2.2.5",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.5",
+    "react-scripts": "^2.1.8",
     "react-spinners": "^0.5.1",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
@@ -18,10 +19,12 @@
     "sass-loader": "^7.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start:dev": "react-scripts start",
+    "build": "npm run clean && react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "clean": "rm -rf build",
+    "start": "npm run build && node server"
   },
   "eslintConfig": {
     "extends": "react-app"

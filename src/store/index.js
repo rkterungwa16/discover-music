@@ -5,10 +5,16 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import Reducers from '../reducers'
 
 const loggerMiddleware = createLogger()
+let Store
+if (process.env.NODE_ENV !== 'production') {
+  Store = createStore(Reducers, compose(
+    applyMiddleware(thunkMiddleware, loggerMiddleware),
+    devTools()
+  ))
+} else {
+  Store = createStore(Reducers, compose(applyMiddleware(thunkMiddleware)))
+}
 
-const Store = createStore(Reducers, compose(
-  applyMiddleware(thunkMiddleware, loggerMiddleware),
-  devTools()
-))
+
 
 export default Store
