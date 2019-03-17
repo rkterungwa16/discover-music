@@ -44,22 +44,5 @@
     "enzyme-adapter-react-16": "^1.11.2",
     "react-test-renderer": "^16.8.4",
     "redux-mock-store": "^1.5.3"
-  },
-  "jest": {
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
-    "collectCoverageFrom": [
-      "src/components/*.{js,jsx}",
-      "src/container/*.{js,jsx}",
-      "src/reducers/*.{js,jsx}",
-      "src/utils/*.{js,jsx}",
-      "src/actions/*.{js,jsx}",
-      "src/helpers/*.{js,jsx}"
-    ],
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/tests/__mocks__/fileMock.js",
-      "\\.(css|less|scss)$": "<rootDir>/src/tests/__mocks__/styleMock.js"
-    }
   }
 }

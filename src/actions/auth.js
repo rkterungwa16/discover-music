@@ -4,9 +4,6 @@ import {
   AUTHORIZE_USER_SUCCEEDED
 } from '../constants'
 
-import { authorizeUserApi } from '../utils/auth'
-import { handleError } from '../utils/fetch'
-
 export function authorizeUserRequest () {
   return {
     type: AUTHORIZE_USER_REQUESTED
@@ -26,21 +23,5 @@ export function authorizeUserFailure (error) {
     payload: {
       error: error
     }
-  }
-}
-
-export function authorizeUser () {
-  return (dispatch) => {
-    dispatch(authorizeUserRequest())
-
-    return authorizeUserApi()
-      .then((response) => {
-        dispatch(authorizeUserSuccess(response))
-        return true
-      })
-      .catch((error) => {
-        dispatch(authorizeUserFailure(handleError(error)))
-        return false
-      })
   }
 }
