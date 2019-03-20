@@ -33,7 +33,6 @@ beforeEach(() => {
   })
 })
 
-
 test('it should test that current user Album is requested', () => {
   const action = getCurrentUserAlbumRequest()
   expect(action.type).toEqual('FETCH_CURRENT_USER_ALBUMS_REQUESTED')
