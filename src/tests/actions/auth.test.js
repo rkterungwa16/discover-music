@@ -2,7 +2,6 @@ import * as configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
 import {
-  authorizeUser,
   authorizeUserFailure,
   authorizeUserRequest,
   authorizeUserSuccess
@@ -28,16 +27,3 @@ test('it should test that a user authorization has failed', () => {
   const action = authorizeUserFailure({ error: 'authorization has failed' })
   expect(action.payload.error).toEqual({ error: 'authorization has failed' })
 })
-
-// test('Should asynchronously authorize a user', () => {
-
-//   const expectedActions = [
-//     { type: types.AUTHORIZE_USER_FAILED },
-//     { type: types.AUTHORIZE_USER_SUCCEEDED, payload: { name: 'terungwa' } },
-//     { type: types.AUTHORIZE_USER_REQUESTED }
-//   ]
-//   const store = mockStore({ : [] })
-//   return store.dispatch(authorizeUser()).then(() => {
-//     expect(store.getActions()[0].type).toEqual(expectedActions[0].type)
-//   })
-// })
