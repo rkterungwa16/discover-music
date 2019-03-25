@@ -10,6 +10,7 @@ import MusicCard from '../components/MusicCard'
 import * as artistsActions from '../actions/artists'
 import * as userActions from '../actions/user'
 import * as playlistActions from '../actions/playlist'
+import * as pageRouteActions from '../actions/pageRoute'
 import { CALLBACK_BASE_URL, HTTP } from '../constants'
 
 class HomePage extends React.Component {
@@ -25,9 +26,7 @@ class HomePage extends React.Component {
   componentDidMount () {
     let hashParams = {};
 
-    this.setState({
-      currentRoute: this.props.location.pathname.split('/')[0]
-    });
+    this.props.pageRouteActions.setCurrentRoute(this.props.location.pathname.split('/')[0])
 
 	  let e, r = /([^&;=]+)=?([^&;]*)/g,
       q = this.props.location.hash.substring(1);
@@ -47,11 +46,11 @@ class HomePage extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState){
-
    if (nextProps.featuredPlaylist !== prevState.featuredPlaylist) {
     return {
       featuredPlaylist: nextProps.featuredPlaylist,
-      loading: false
+      loading: false,
+      currentRoute: nextProps.pageRoute
     }
   }
 
@@ -113,7 +112,8 @@ const mapStateToProps = state => {
   return {
     token: state.authorize.token,
     featuredPlaylist: state.playlist.featuredPlaylists,
-    loading: state.playlist.isFetchingPlaylists
+    loading: state.playlist.isFetchingPlaylists,
+    pageRoute: state.pageRoute.pageRoute
   }
 }
 
@@ -122,7 +122,8 @@ const mapDispatchToProps = dispatch => {
     dispatch,
     artistsActions: bindActionCreators(artistsActions, dispatch),
     userActions: bindActionCreators(userActions, dispatch),
-    playlistActions: bindActionCreators(playlistActions, dispatch)
+    playlistActions: bindActionCreators(playlistActions, dispatch),
+    pageRouteActions: bindActionCreators(pageRouteActions, dispatch)
   }
 }
 

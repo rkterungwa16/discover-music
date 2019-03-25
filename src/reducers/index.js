@@ -7,6 +7,7 @@ import userAlbums from './currentUserAlbums'
 import userTracks from './currentUserTracks'
 import playlist from './playlist'
 import genres from './genres'
+import pageRoute from './pageRoute'
 
 const Reducers = combineReducers({
   artists,
@@ -15,7 +16,8 @@ const Reducers = combineReducers({
   userAlbums,
   userTracks,
   playlist,
-  genres
+  genres,
+  pageRoute
 })
 
 export default Reducers
