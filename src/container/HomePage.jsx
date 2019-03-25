@@ -46,19 +46,21 @@ class HomePage extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.featuredPlaylist) {
-      this.setState({
-        featuredPlaylist: nextProps.featuredPlaylist,
-        loading: false
-      })
-    }
+  static getDerivedStateFromProps(nextProps, prevState){
 
-    if (nextProps.loading) {
-      this.setState({
-        loading: nextProps.loading
-      })
+   if (nextProps.featuredPlaylist !== prevState.featuredPlaylist) {
+    return {
+      featuredPlaylist: nextProps.featuredPlaylist,
+      loading: false
     }
+  }
+
+  if (nextProps.loading) {
+    return {
+      loading: nextProps.loading
+    }
+  }
+   else return null;
   }
 
   renderFeaturedPlaylist (playlists) {
