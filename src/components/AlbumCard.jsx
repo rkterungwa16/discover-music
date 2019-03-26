@@ -1,7 +1,6 @@
 import React from 'react'
 
 const AlbumCard = (props) => {
-  console.log('album card', props)
   return (
     <div
       className='card'

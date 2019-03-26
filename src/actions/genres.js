@@ -30,7 +30,6 @@ export function getGenresFailure (error) {
 }
 
 export function getAllGenres (params, token) {
-  console.log('genres params', token)
   return (dispatch) => {
     dispatch(getGenresRequest())
 
