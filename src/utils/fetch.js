@@ -109,6 +109,5 @@ export function parseJSON (response) {
 }
 
 export const handleError = (error) => {
-  console.log('page error', error)
   return error
 }

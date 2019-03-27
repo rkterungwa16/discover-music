@@ -2,12 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, compose } from 'redux'
 
-import Playlists from '../components/Playlists'
+import MusicListCollection from '../components/MusicListCollection'
 
 import hasLoader from '../hoc/hasLoader'
 import hasData from '../hoc/hasData'
 
-import * as artistsActions from '../actions/artists'
 import * as userActions from '../actions/user'
 import * as playlistActions from '../actions/playlist'
 import * as pageRouteActions from '../actions/pageRoute'
@@ -16,7 +15,11 @@ class HomePage extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Playlists {...this.props} />
+        <MusicListCollection
+          musicListCollection={this.props.featuredPlaylist}
+          collectionType='playlists'
+          imageType='images'
+        />
       </React.Fragment>
     )
   }
@@ -34,7 +37,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     dispatch,
-    artistsActions: bindActionCreators(artistsActions, dispatch),
     userActions: bindActionCreators(userActions, dispatch),
     playlistActions: bindActionCreators(playlistActions, dispatch),
     pageRouteActions: bindActionCreators(pageRouteActions, dispatch)
@@ -43,7 +45,7 @@ const mapDispatchToProps = dispatch => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   compose(
-    hasData('playlistActions'),
+    hasData('playlistActions', 'getFeaturedPlaylists'),
     hasLoader
   )(HomePage)
 )
