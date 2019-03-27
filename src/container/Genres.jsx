@@ -11,19 +11,15 @@ import * as userActions from '../actions/user'
 import * as genresActions from '../actions/genres'
 import * as pageRouteActions from '../actions/pageRoute'
 
-class Genres extends React.Component {
-  render () {
-    return (
-      <React.Fragment>
-        <MusicListCollection
-          musicListCollection={this.props.genres}
-          collectionType='categories'
-          imageType='icons'
-        />
-      </React.Fragment>
-    )
-  }
-}
+const Genres = props => (
+  <React.Fragment>
+    <MusicListCollection
+      musicListCollection={props.genres}
+      collectionType='categories'
+      imageType='icons'
+    />
+  </React.Fragment>
+)
 
 const mapStateToProps = state => {
   return {

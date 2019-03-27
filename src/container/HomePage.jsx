@@ -11,19 +11,15 @@ import * as userActions from '../actions/user'
 import * as playlistActions from '../actions/playlist'
 import * as pageRouteActions from '../actions/pageRoute'
 
-class HomePage extends React.Component {
-  render() {
-    return (
-      <React.Fragment>
-        <MusicListCollection
-          musicListCollection={this.props.featuredPlaylist}
-          collectionType='playlists'
-          imageType='images'
-        />
-      </React.Fragment>
-    )
-  }
-}
+const HomePage = props => (
+  <React.Fragment>
+    <MusicListCollection
+      musicListCollection={props.featuredPlaylist}
+      collectionType='playlists'
+      imageType='images'
+    />
+  </React.Fragment>
+)
 
 const mapStateToProps = state => {
   return {

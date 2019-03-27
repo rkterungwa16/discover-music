@@ -3,7 +3,6 @@ import React from 'react'
 import { CALLBACK_BASE_URL, HTTP } from '../constants'
 
 const hasData = (pageAction, pageActionMethod) => WrappedComponent => {
-  console.log('I am in has data')
   return class extends React.Component {
     componentDidMount() {
       let hashParams = {};
@@ -33,7 +32,6 @@ const hasData = (pageAction, pageActionMethod) => WrappedComponent => {
     }
 
     render() {
-      console.log('has data props', this.props)
       return (<WrappedComponent {...this.props} />)
     }
   }
