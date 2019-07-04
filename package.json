@@ -16,7 +16,8 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "remote-redux-devtools": "^0.5.16",
-    "sass-loader": "^7.1.0"
+    "sass-loader": "^7.1.0",
+    "snyk": "^1.190.0"
   },
   "scripts": {
     "start:dev": "react-scripts start",
@@ -24,7 +25,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "clean": "rm -rf build",
-    "start": "npm run build && node server"
+    "start": "npm run build && node server",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -44,5 +47,6 @@
     "enzyme-adapter-react-16": "^1.11.2",
     "react-test-renderer": "^16.8.4",
     "redux-mock-store": "^1.5.3"
-  }
+  },
+  "snyk": true
 }
